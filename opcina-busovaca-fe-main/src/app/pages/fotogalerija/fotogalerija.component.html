@@ -1,0 +1,67 @@
+<div class="main-container">
+    <div class="links-container">
+        <h2>Vezani linkovi:</h2>
+        <a href="/o-opcini/opcinski-nacelnik">Općinski načelnik<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/vijecnici">Općinski vijećnici<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/">Službeni glasnik<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/sluzbe-uprave">Službe uprave<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/aktuelnosti/page/1">{{ 'aktuelnosti_naslov' | translate }}<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/dokumenti">Dokumenti<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/dokumenti-i-zakljucci">Dokumenti i zaključci OV<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/javni-oglasi/page/1">Javni oglasi<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/radna-tijela-povjerenstva">{{ 'radna_tijela' | translate }}<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/obrasci">Obrasci<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/fotogalerija">Fotogalerija<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+    </div>
+    
+
+
+
+
+    <div class="content-container">
+        <h2>Fotogalerija</h2>
+        <br>
+        <div *ngIf="!loadedGallery" class="loader"></div>
+        <div class="photo-container">
+            <a title="image" class="card" *ngFor="let photo of photos; let i = index">
+                <div class="card-wrapper">
+                 
+                  <img (click)="showGallery(i)" src="{{photo.selectedFile}}" alt="" loading=lazy/>
+                  
+                </div>
+              </a>
+              
+             
+        </div>
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li><a (click)="previousPageGallery()" class="prev">
+                        < Nazad </a>
+                </li>
+                <li><a (click)="nextPageGallery()" class="next">Sljedeća ></a></li>
+            </ul>
+        </div>
+        <br>
+        <br>
+      </div>
+
+
+    <div class="other-articles-container">
+        <app-side-news></app-side-news>
+    </div>
+    
+
+
+</div>
+

@@ -1,0 +1,87 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+</div>
+<div class="carousel-container">
+  <owl-carousel-o id="carousel" [options]="customOptions">
+    <ng-template carouselSlide>
+      <div class="slide">
+        <div class="inner-content-container">
+          <div class="inner-box">
+            <h3>Naslovna stranica</h3>
+              <h1>Općina Busovača</h1>
+              <p routerLink="/o-opcini/o-nama">Saznaj više</p>
+          </div>
+        </div>
+        <div class="img-container">
+          <img src="../../../assets/img/landing/main.png" alt="">
+        </div>
+      
+      </div>
+     
+    </ng-template>
+    <ng-template carouselSlide>
+      <div class="slide">
+        <div class="inner-content-container">
+          <div class="inner-box">
+            <h3>Dokumentarni film</h3>
+              <h1>650 GODINA BUSOVAČE </h1>
+              <p routerLink="/film">Pogledaj više</p>
+          </div>
+        </div>
+        <div class="img-container">
+          <img class="gif-img" src="../../../assets/img/landing/film.png" alt="">
+        </div>
+      
+      </div>
+     
+    </ng-template>
+    <ng-template carouselSlide *ngFor="let item of headerPosts">
+      <div class="slide">
+        <div class="inner-content-container">
+          <div class="inner-box">
+              <h3>{{item.subTitle}}</h3>
+              <h1>{{item.title}}</h1>
+              <p (click)="openArticle(item._id)">Saznaj više</p>
+          </div>
+        </div>
+        <div class="img-container">
+          <img src="{{item.selectedFile}}" alt="">
+        </div>
+      
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</div>
+
+<div class="news-titles-container">
+  <div class="inner-titles-container">
+    <h2>Izdvojeni članci</h2>
+    <a href="/aktuelnosti/page/1">Sve novosti</a>
+  </div>
+  
+</div>
+  <div class="news-container">
+    	<div class="inner-news-container">
+        
+          <div class="news-box" *ngFor="let newsItem of news" (click)="openArticle(newsItem._id)">
+         
+            <img src="{{newsItem.selectedFile}}" alt="" >
+      
+            
+            <div class="inner-news-box">
+              <p class="newsSubTitle">{{newsItem.subTitle}}</p>
+              <h3>{{newsItem.title}}</h3>
+              <p class="newsDate">Datum objave: {{newsItem.createdAt}}</p>
+            </div>
+    
+          </div>
+      
+        
+      </div>
+  </div>
+  <app-servis-nabavke></app-servis-nabavke>
+  <app-javne-ustanove></app-javne-ustanove>
+
+  <app-counter></app-counter>
+
+

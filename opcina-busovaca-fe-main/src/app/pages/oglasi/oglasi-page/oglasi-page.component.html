@@ -1,0 +1,78 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+</div>
+<div class="main-container1">
+  <div class="links-container">
+    <h2>Vezani linkovi:</h2>
+    <a href="/o-opcini/opcinski-nacelnik">Općinski načelnik<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/vijecnici">Općinski vijećnici<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/">Službeni glasnik<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/sluzbe-uprave">Službe uprave<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/aktuelnosti/page/1">{{ 'aktuelnosti_naslov' | translate }}<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/dokumenti">Dokumenti<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/dokumenti-i-zakljucci">Dokumenti i zaključci OV<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/javni-oglasi/page/1">Javni oglasi<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/radna-tijela-povjerenstva">{{ 'radna_tijela' | translate }}<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/obrasci">Obrasci<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+    <a href="/fotogalerija">Fotogalerija<i class="fa fa-angle-right"></i></a>
+    <hr class="horiz-line" style="width: 95%;">
+</div>
+
+
+
+
+
+
+    <div class="content-container1">
+        <h2>Javni oglasi</h2>
+        
+
+        <form action="" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <input (input)="onSearchChange($event.target.value)"  formControlName="searchBox" type="text" placeholder="Pretraga oglasa..." name="search" minlength="5">
+          <button type="submit">Traži</button>
+        </form>
+        <p *ngIf="warning">Unesite više od 4 karaktera.</p>
+        <p *ngIf="noResult">Nema rezultata pretrage.</p>
+
+        <div class="container">
+            <ul class="l-news">
+              <li class="l-news__content p-news__content" *ngFor="let item of oglasi" [routerLink]="['/javni-oglasi/oglas', item._id]">
+                <div class="content-container">
+          
+                  <div class="l-news__content__day p-news__content__day">{{item.createdAt}}</div>
+                  <div *ngIf="item.type=='nabavke'" class="l-news__content__label p-news__content__label disappear">JAVNE NABAVKE</div>
+                  <div *ngIf="item.type=='poziv'" class="l-news__content__label p-news__content__label2 disappear">JAVNI POZIV</div>
+                  <div class="l-news__content__text p-news__content__text">{{item.title}}</div>
+                </div>
+                 
+                  <div class="arrow-container">></div>
+              </li>
+          </ul>
+          </div>
+          <div class="pagination-container">
+            <ul class="pagination">
+                <li><a (click)="previousPage()" class="prev">< Nazad </a></li>
+                <li><a (click)="nextPage()" class="next">Sljedeća ></a></li>
+              </ul>
+          </div>
+    </div>
+
+
+    <div class="other-articles-container">
+        <app-side-news></app-side-news>
+    </div>
+    
+
+
+</div>
+

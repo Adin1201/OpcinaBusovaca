@@ -1,0 +1,17 @@
+ <h2>{{'aktuelni' | translate}}</h2>
+    <a class="pogledajSve" (click)="openAll()">Pogledaj sve</a>
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+      <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+    </div>
+    <div class="inner-news-container">
+    
+        <div class="news-box" *ngFor="let newsItem of news" (click)="openArticle(newsItem._id)">
+          <img src="{{newsItem.selectedFile}}" alt="" >
+          <div class="inner-news-box">
+            <p class="newsSubTitle">{{newsItem.subTitle}}</p>
+            <h3>{{newsItem.title}}</h3>
+            <p class="newsDate">{{newsItem.createdAt}}</p>
+          </div>
+  
+        </div>
+    </div>

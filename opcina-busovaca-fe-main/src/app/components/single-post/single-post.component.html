@@ -1,0 +1,100 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+    <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+</div>
+<div class="main-container">
+    <div class="links-container">
+        <h2>Vezani linkovi:</h2>
+        <a href="/o-opcini/opcinski-nacelnik">Općinski načelnik<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/vijecnici">Općinski vijećnici<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/">Službeni glasnik<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/sluzbe-uprave">Službe uprave<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/aktuelnosti/page/1">Aktuelnosti<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/dokumenti">Dokumenti<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/dokumenti-i-zakljucci">Dokumenti i zaključci OV<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/radna-tijela-povjerenstva">Radna tijela i povjerenstva<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/obrasci">Obrasci<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+        <a href="/fotogalerija">Fotogalerija<i class="fa fa-angle-right"></i></a>
+        <hr class="horiz-line" style="width: 95%;">
+    </div>
+
+
+
+
+    <div class="content-container">
+        <div class="subTitle-container">
+            <h4>{{object?.subTitle}}</h4>
+        </div>
+        <div class="w3-content w3-display-container">
+            <div class="w3-display-container mySlides">
+                <img src="{{object?.selectedFile}}">
+                <div class="w3-display-topright w3-small w3-container w3-padding-16 w3-black">
+                    {{slideIndex}}/{{imgs.length+1}}
+                </div>
+            </div>
+            <ng-container *ngFor="let img of imgs">
+                <div class="w3-display-container mySlides">
+                    <img src="{{img}}">
+                    <div class="w3-display-topright w3-small w3-container w3-padding-16 w3-black">
+                        {{slideIndex}}/{{imgs.length+1}}
+                    </div>
+                </div>
+            </ng-container>
+
+
+
+            <button class="w3-button w3-display-left w3-black" (click)="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-display-right w3-black" (click)="plusDivs(1)">&#10095;</button>
+
+        </div>
+
+        <div class="inner-content-text">
+            <h1>{{object?.title}}</h1>
+            <p class="dateAdded">{{dateCreated}}</p>
+            <ng-container *ngIf="linkExists">
+                <div class="iframe-container">
+                    <iframe width="420" height="315" [src]="youtubeLink | safe">
+                    </iframe>
+                </div>
+            </ng-container>
+       
+            
+            <hr>
+           
+
+
+            <div style="white-space: pre-line">
+                <p class="content">{{object?.body}}</p>
+            </div>
+            <div class="oglas-link" *ngIf="object?.oglasLink" style="margin-top: 18px;">
+                <a href="{{object?.oglasLink}}">Pročitaj više...</a>
+            </div>
+
+            <div class="datoteke" *ngIf="object?.attachedItems.length > 0">
+                <hr style="width: 95%; margin-bottom: 10px;">
+                <h4 style="margin-bottom: 10px;">Priložene datoteke: </h4>
+                <ng-container *ngFor="let link of object?.attachedItems">
+                    <a class="dl" (click)="downloadBase64Data(link.file, link.name)">{{link?.name}} <i class="fa fa-download"></i></a>
+                    <br><br>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="other-articles-container">
+        <app-side-news></app-side-news>
+    </div>
+</div>
